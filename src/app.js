@@ -15,6 +15,18 @@ function randomSuit() {
   return suit[picked];
 }
 
+function createCard(cls, num) {
+  let div = document.createElement("div");
+  if (typeof cls != "object") {
+    div.classList.add("card");
+    div.classList.add(cls);
+  } else {
+    div = cls;
+  }
+  div.innerHTML = num;
+  return div;
+}
+
 //getting user input regarding buttons and card amounts
 let drawBtn = document.getElementById("draw");
 let sortBtn = document.getElementById("sort");
@@ -25,7 +37,7 @@ drawBtn.addEventListener("click", () => {
   //getting data inside div for dataSpace for draw, number input, space for cards
   let cardSpace = document.getElementById("cardSpace");
   let pickedNumber = `${amountInp.value}`;
-  let genCard = document.getElementsByClassName("card");
+  let genCard = cardSpace.getElementsByClassName("card");
 
   //while card space isn't null/empty, refreshing cards every time there's a click
   if (genCard == null) {
@@ -37,15 +49,13 @@ drawBtn.addEventListener("click", () => {
       crd = cardSpace.lastChild; //aux for next last card, loop continues
     }
   }
-
+  //container for whole card space, includes ID
+  let contain = document.createElement("div");
   //adding cards according to user input
   for (let i = 0; i < pickedNumber; i++) {
-    let oneCard = document.createElement("div");
-    oneCard.classList.add("card");
-    oneCard.classList.add(randomSuit());
-    oneCard.innerHTML = randomNumber();
-    cardSpace.append(oneCard);
+    contain.append(createCard(randomSuit(), randomNumber()));
   }
+  cardSpace.append(contain); //including container on card space
 });
 
 //listener for sorting button
@@ -97,24 +107,24 @@ sortBtn.addEventListener("click", () => {
   }
   //creating cards for every number and respective class
   for (let i = 0; i < numsUnsort.length; i++) {
+    let contain = document.createElement("div");
     //in case of 1 11 12 13, turn number into A J Q K
-    let num = numsUnsort[i];
-    switch (num) {
+    switch (numsUnsort[i]) {
       case "1":
-        classUnsort[i].innerHTML = "A";
+        contain.append(createCard(classUnsort[i], "A"));
         break;
       case "11":
-        classUnsort[i].innerHTML = "J";
+        contain.append(createCard(classUnsort[i], "J"));
         break;
       case "12":
-        classUnsort[i].innerHTML = "Q";
+        contain.append(createCard(classUnsort[i], "Q"));
         break;
       case "13":
-        classUnsort[i].innerHTML = "K";
+        contain.append(createCard(classUnsort[i], "K"));
         break;
       default:
-        classUnsort[i].innerHTML = num;
+        contain.append(createCard(classUnsort[i], numsUnsort[i]));
     }
-    cardSpace.append(classUnsort[i]);
+    logSpace.append(contain);
   }
 });

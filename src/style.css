@@ -5,7 +5,7 @@ body {
   font-size: 20px;
 }
 
-div {
+body > div {
   margin: 20px;
   display: flex;
 }
@@ -13,9 +13,10 @@ div {
 #dataSpace > * {
   margin: 0px 5px;
   border-radius: 5px;
+  display: flex;
 }
 
-#cardSpace {
+#cardSpace > * {
   display: inline-flex;
 }
 
