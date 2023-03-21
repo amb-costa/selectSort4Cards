@@ -3,24 +3,6 @@ import "bootstrap";
 import "./style.css";
 
 //functions to generate random numbers and suits
-function toNumber(el) {
-  switch (el) {
-    case "A":
-      return "1";
-      break;
-    case "J":
-      return "11";
-      break;
-    case "Q":
-      return "12";
-      break;
-    case "K":
-      return "13";
-      break;
-    default:
-      return el;
-  }
-}
 
 function toLetter(el) {
   switch (el) {
