@@ -98,24 +98,23 @@ sortBtn.addEventListener("click", () => {
   let ers = numb;
   let sses = suit;
   logSpace.innerHTML = "";
-  logSpace.innerHTML = "<h4>Bubble log:</h4>";
+  logSpace.innerHTML = "<h4>Select sort log:</h4>";
 
-  //adapting bubbleSort function from 4Geeks lesson
+  //adapting SelectionSort function from 4Geeks lesson
   //sorting number array, applying changes to class array at the same time
   //both arrays have the same length
-  let wall = ers.length - 1; //wall at end of array
-  while (wall > 0) {
-    let i = 0;
-    while (i < wall) {
-      //comparison between adjacent positions in number array
-      //if left one is bigger: swap in both arrays
-      if (parseInt(ers[i]) > parseInt(ers[i + 1])) {
-        let auxNum = ers[i];
-        let auxClass = sses[i];
-        ers[i] = ers[i + 1];
-        sses[i] = sses[i + 1];
-        ers[i + 1] = auxNum;
-        sses[i + 1] = auxClass;
+  let wall = 0; //wall at the initial index
+  while (wall < ers.length - 1) {
+    for (let i = wall + 1; i < ers.length; i++) {
+      //if number at left is bigger than number at right: swap them
+      //exchanges with wall so it doesn't process the same number again
+      if (parseInt(ers[wall]) > parseInt(ers[i])) {
+        let auxNum = ers[wall];
+        let auxClass = sses[wall];
+        ers[wall] = ers[i];
+        sses[wall] = sses[i];
+        ers[i] = auxNum;
+        sses[i] = auxClass;
 
         //creating row, filling with updated array
         //adding row to logSpace
@@ -126,8 +125,7 @@ sortBtn.addEventListener("click", () => {
         }
         logSpace.append(auxRow);
       }
-      i++; //sorting until whole array is done
     }
-    wall--; //reducing wall for optimization
+    wall++;
   }
 });
