@@ -16,10 +16,6 @@ body > div {
   display: flex;
 }
 
-#cardSpace > * {
-  display: inline-flex;
-}
-
 .card {
   background: white;
   border-radius: 5px;
@@ -71,4 +67,12 @@ body > div {
 .card.diamond::after {
   content: "\2666";
   color: red;
+}
+
+.cardContainer {
+  display: flex;
+}
+
+#logSpace {
+  display: inline-block;
 }
